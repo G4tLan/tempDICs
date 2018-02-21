@@ -47,31 +47,38 @@ void printArray(int *Data, int numElements ){
 void findFivePercent(int *Data, int numElements, int * bounds, int lengthOfBounds){
 	
 	
-	int count = 0;
-	int *P1 = Data;
-	int randPos = rand()%numElements;
-	 randPos = 7;
-	P1 += randPos;
-	int *P2 = Data;
-	int iter = 0;
-	for(int i =0; i <  lengthOfBounds; i++){
-		
-		iter = numElements/(*(bounds + i));
-		
-		while(P2 < P1){
-			P2 += iter;
-			if(P1 >= P2 ){
-				count++;
-			} else {
-				numElements = iter;
-				P2 -= iter;
-				break;
+	
+	int fivePercent = 0.05*numElements;
+	
+	for(int element = 1; element <= fivePercent; element++){
+		int tempNumElements = numElements;
+		int *P1 = Data;
+		int randPos = rand()%tempNumElements;
+		randPos = 7;
+		P1 += randPos;
+		int *P2 = Data;
+		int iter = 0;
+		int count = 0;
+		printf("coordinates: ");
+		for(int i =0; i <  lengthOfBounds; i++){
+			
+			iter = tempNumElements/(*(bounds + i));
+			
+			while(P2 < P1){
+				P2 += iter;
+				if(P1 >= P2 ){
+					count++;
+				} else {
+					tempNumElements = iter;
+					P2 -= iter;
+					break;
+				}
 			}
+			printf("%d ", count );
+			count = 0;
 		}
-		printf("%d ", count );
-		count = 0;
+		printf(" value= %d\n",*P1);
 	}
-	printf("\n");
 }
 
 
